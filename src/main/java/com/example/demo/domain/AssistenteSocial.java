@@ -5,18 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Nutricionista {
+public class AssistenteSocial {
     @Id
     @GeneratedValue
     private long id;
-    private String nome;
     private String login;
     private String senha;
-    private String email;
     private String matricula;
+    private String email;
     private String telefone;
+    private String nome;
 
-    public Nutricionista() {
+    public AssistenteSocial() {
     }
 
     public long getId() {
@@ -43,6 +43,14 @@ public class Nutricionista {
         this.senha = senha;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -57,14 +65,6 @@ public class Nutricionista {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
     }
 
     public String getNome() {

@@ -1,9 +1,7 @@
 package com.example.demo.config;
 
-import com.example.demo.domain.Nutricionista;
-import com.example.demo.domain.ChefeCozinha;
+import com.example.demo.repository.AssistenteSocialRepository;
 import com.example.demo.repository.NutricionistaRepository;
-import com.example.demo.repository.ChefeCozinhaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +15,10 @@ public class Instantiation implements CommandLineRunner{
 	private AlunoRepository repository;
 
 	@Autowired
-	private NutricionistaRepository nutricionistaRepository;
+	private AssistenteSocialRepository assistenteSocialRepository;
 
 	@Autowired
-	private ChefeCozinhaRepository chefeCozinhaRepository;
+	private NutricionistaRepository nutricionistaRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
