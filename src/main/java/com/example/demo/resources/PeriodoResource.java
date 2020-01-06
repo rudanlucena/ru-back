@@ -22,14 +22,15 @@ public class PeriodoResource {
 	
 
 
-	/*@GetMapping("/{matricula}")
+	@GetMapping()
 	@CrossOrigin
-	public ResponseEntity<Optional<Aluno>> findByMatricula(@PathVariable("matricula") String matricula){
-		Optional<Aluno> aluno = service.findByMatricula(matricula);
-		return ResponseEntity.ok().body(aluno);
+	public ResponseEntity<Periodo> findPeriodo(){
+		List<Periodo> periodos = service.findAll();
+		Periodo p = periodos.get(0);
+		return ResponseEntity.ok().body(p);
 	}
 
-    @GetMapping("/{matricula}/{senha}")
+    /*@GetMapping("/{matricula}/{senha}")
     @CrossOrigin
     public ResponseEntity<Optional<Aluno>> findByLogin(@PathVariable("matricula") String matricula, @PathVariable("senha") String senha){
         Optional<Aluno> aluno = service.findByLogin(matricula, senha);

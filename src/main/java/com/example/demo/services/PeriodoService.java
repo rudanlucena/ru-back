@@ -19,6 +19,10 @@ public class PeriodoService {
 		return repository.findById(id);
 	}
 
+	public List<Periodo> findAll(){
+		return repository.findAll();
+	}
+
 	public Periodo save(Periodo periodo) {
 		return repository.save(periodo);
 	}

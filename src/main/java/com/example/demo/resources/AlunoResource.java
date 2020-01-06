@@ -63,12 +63,16 @@ public class AlunoResource {
 
 
         Optional<Aluno> aluno = service.findByMatricula(matricula);
-        auxilio = auxilioService.save(auxilio);
-
-        aluno.get().setAuxilio(auxilio);
+        if(aluno.get().getAuxilio()!=null){
+        	aluno.get().getAuxilio().setAlmoco(auxilio.isAlmoco());
+			aluno.get().getAuxilio().setJantar(auxilio.isJantar());
+		}
+        else{
+			auxilio = auxilioService.save(auxilio);
+			aluno.get().setAuxilio(auxilio);
+		}
 
         service.save(aluno.get());
-
         return ResponseEntity.ok().body(aluno);
     }
 
