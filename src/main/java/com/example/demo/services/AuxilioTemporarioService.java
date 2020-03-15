@@ -20,6 +20,12 @@ public class AuxilioTemporarioService {
 		return repository.findById(id);
 	}
 
+	public Optional<AuxilioTemporario> findByUuid(String Uuid){
+		return repository.findByAluno_Uuid(Uuid);
+	}
+
+
+
 	public List<AuxilioTemporario> findAll(){
 		return repository.findAll();
 	}

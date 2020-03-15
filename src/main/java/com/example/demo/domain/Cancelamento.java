@@ -1,36 +1,27 @@
 package com.example.demo.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
-public class AuxilioTemporario {
-    @Id
+public class Cancelamento {
+
     @GeneratedValue
+    @Id
     private long id;
-    private boolean almoco;
-    private boolean jantar;
-    private LocalDate inicio;
-    private LocalDate fim;
-    private String motivo;
-    private String anexo;
+    boolean almoco;
+    boolean jantar;
+    LocalDate inicio;
+    LocalDate fim;
+    String motivo;
 
     @OneToOne
     private Aluno aluno;
 
-    private String status;
-
-    public AuxilioTemporario() {
-        this.status = "pendente";
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public Cancelamento() {
     }
 
     public boolean isAlmoco() {
@@ -73,14 +64,6 @@ public class AuxilioTemporario {
         this.motivo = motivo;
     }
 
-    public String getAnexo() {
-        return anexo;
-    }
-
-    public void setAnexo(String anexo) {
-        this.anexo = anexo;
-    }
-
     public Aluno getAluno() {
         return aluno;
     }
@@ -89,11 +72,11 @@ public class AuxilioTemporario {
         this.aluno = aluno;
     }
 
-    public String getStatus() {
-        return status;
+    public long getId() {
+        return id;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setId(long id) {
+        this.id = id;
     }
 }

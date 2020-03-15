@@ -1,8 +1,11 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Periodo {
@@ -11,8 +14,10 @@ public class Periodo {
     private long id;
 
     private String nome;
-    private String inicio;
-    private String fim;
+
+    private LocalDate inicio;
+
+    private LocalDate fim;
 
     public Periodo() {
     }
@@ -25,20 +30,20 @@ public class Periodo {
         this.nome = nome;
     }
 
-    public String getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public void setInicio(String inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
-    public String getFim() {
-        return fim;
+    public void setFim(LocalDate fim) {
+        this.fim = fim;
     }
 
-    public void setFim(String fim) {
-        this.fim = fim;
+    public LocalDate getFim() {
+        return fim;
     }
 
     public long getId() {

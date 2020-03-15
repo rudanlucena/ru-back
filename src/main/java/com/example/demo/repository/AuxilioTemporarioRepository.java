@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface AuxilioTemporarioRepository extends JpaRepository<AuxilioTemporario, Long> {
     //Optional<Aluno> findByMatricula(String matricula);
     List<AuxilioTemporario> findByStatus(String status);
+    Optional<AuxilioTemporario> findByAluno_Uuid(String id);
     //Optional<Aluno> findByMatriculaAndSenha(String matricula, String senha);
 }

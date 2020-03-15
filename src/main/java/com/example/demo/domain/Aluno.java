@@ -16,6 +16,9 @@ public class Aluno {
 	private String situacao;
 	private String cota;
 	private String senha;
+	@Column(columnDefinition = "TEXT")
+
+	private String image;
 
 	@OneToOne
 	private Auxilio auxilio;
@@ -86,5 +89,13 @@ public class Aluno {
 
 	public void setAuxilio(Auxilio auxilio) {
 		this.auxilio = auxilio;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

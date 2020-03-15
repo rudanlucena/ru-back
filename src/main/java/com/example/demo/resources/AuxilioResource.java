@@ -17,8 +17,6 @@ public class AuxilioResource {
 	
 	@Autowired
 	private AuxilioService service;
-	
-
 
 	/*@GetMapping("/{matricula}")
 	@CrossOrigin

@@ -14,9 +14,14 @@ import com.example.demo.repository.AlunoRepository;
 public class AlunoService {
 	@Autowired
 	private AlunoRepository repository;
-	
+
 	public List<Aluno> findAll(){
 		return repository.findAll();
+	}
+
+	public List<Aluno> findBolsistas(){
+
+		return repository.findAlunosByAuxilioNotNull();
 	}
 
 	public Optional<Aluno> findByMatricula(String matricula){
