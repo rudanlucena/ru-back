@@ -14,5 +14,7 @@ public interface AuxilioTemporarioRepository extends JpaRepository<AuxilioTempor
     //Optional<Aluno> findByMatricula(String matricula);
     List<AuxilioTemporario> findByStatus(String status);
     Optional<AuxilioTemporario> findByAluno_Uuid(String id);
+
+    List<AuxilioTemporario> findByAluno_Id(long id);
     //Optional<Aluno> findByMatriculaAndSenha(String matricula, String senha);
 }

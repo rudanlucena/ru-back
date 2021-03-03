@@ -24,7 +24,9 @@ public class AuxilioTemporarioService {
 		return repository.findByAluno_Uuid(Uuid);
 	}
 
-
+	public List<AuxilioTemporario> findByAluno_id(long id){
+		return repository.findByAluno_Id(id);
+	}
 
 	public List<AuxilioTemporario> findAll(){
 		return repository.findAll();

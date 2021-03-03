@@ -20,7 +20,6 @@ public class AlunoService {
 	}
 
 	public List<Aluno> findBolsistas(){
-
 		return repository.findAlunosByAuxilioNotNull();
 	}
 

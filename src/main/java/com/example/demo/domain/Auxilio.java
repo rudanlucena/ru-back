@@ -10,6 +10,7 @@ public class Auxilio {
     private long id;
     private boolean almoco;
     private boolean jantar;
+    private int faltas;
 
     @OneToOne
     private Periodo periodo;
@@ -49,6 +50,11 @@ public class Auxilio {
         this.id = id;
     }
 
+    public int getFaltas() {
+        return faltas;
+    }
 
-
+    public void setFaltas(int faltas) {
+        this.faltas = faltas;
+    }
 }

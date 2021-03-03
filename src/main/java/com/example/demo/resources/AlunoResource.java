@@ -1,8 +1,10 @@
 package com.example.demo.resources;
 
 import java.net.URI;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,9 @@ public class AlunoResource {
 	
 	@Autowired
 	private AlunoService service;
+
+	@Autowired
+	private HorarioService horarioService;
 
     @Autowired
     private PeriodoService periodoService;
@@ -49,12 +54,71 @@ public class AlunoResource {
 		return ResponseEntity.ok().body(alunos);
 	}
 
+	@GetMapping("/relatorios/{dataInicial}/{dataFinal}")
+	@CrossOrigin
+	public ResponseEntity<List<Comensais>> findRelatorio(@PathVariable("dataInicial") String dataInicial, @PathVariable("dataFinal") String dataFinal){
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		dataInicial = dataInicial.replaceAll("-", "/");
+		dataFinal = dataFinal.replaceAll("-", "/");
+
+		//convert String to LocalDate
+		LocalDate d1 = LocalDate.parse(dataInicial, formatter);
+		LocalDate d2 = LocalDate.parse(dataFinal, formatter);
+
+		List<Aluno> alunos = service.findBolsistas();
+		int totalAlmocoBolsista = 0;
+		int totalJantarBolsista = 0;
+
+		for (Aluno aluno: alunos) {
+			//varificar final de semana
+			if(aluno.getAuxilio().isAlmoco()){
+				totalAlmocoBolsista += 1;
+			}
+			if(aluno.getAuxilio().isJantar()){
+				totalJantarBolsista += 1;
+			}
+		}
+
+		//dataInicial
+		LocalDate dt1 = d1;
+		//dt1 = dt1.plusDays(1);
+		//dataFinal
+		LocalDate dt2 = d2;
+		List<Comensais> comensais = new ArrayList<>();
+		for (LocalDate dt = dt1; dt.compareTo (dt2) <= 0; ) {
+
+			DayOfWeek d = dt.getDayOfWeek();
+			if(d != DayOfWeek.SATURDAY && d != DayOfWeek.SUNDAY) {
+
+				Comensais comensal = new Comensais();
+				comensal.setDatax(dt.toString());
+
+				//verificar ausensias justificadas e diminuir da data;
+
+				//verificar presenças de auxilio temporario e somar;
+
+				comensal.setAlmoco(totalAlmocoBolsista);
+				comensal.setJantar(totalJantarBolsista);
+
+				comensais.add(comensal);
+			}
+
+			dt = dt.plusDays(1);
+		}
+
+		return ResponseEntity.ok().body(comensais);
+	}
+
 	@GetMapping("/{matricula}")
 	@CrossOrigin
 	public ResponseEntity<Optional<Aluno>> findByMatricula(@PathVariable("matricula") String matricula){
+		List<Horario> horarios = horarioService.findAll();
+		Horario horario = horarios.get(0);
 
-		LocalTime inicioAlmoco = LocalTime.of(8, 00);
-		LocalTime iniciojantar = LocalTime.of(17, 00);
+		LocalTime inicioAlmoco = horario.getAlmoco().getAbertura();
+		LocalTime iniciojantar = horario.getJantar().getAbertura();
+
 		LocalTime horaAtual = LocalTime.now();
 		LocalDate dataAtual = LocalDate.now();
 

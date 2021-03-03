@@ -15,4 +15,6 @@ public interface AlunoRepository extends JpaRepository<Aluno, String> {
     Optional<Aluno> findByMatricula(String matricula);
     List<Aluno> findAlunosByAuxilioNotNull();
     Optional<Aluno> findByMatriculaAndSenha(String matricula, String senha);
+
+
 }

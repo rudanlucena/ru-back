@@ -3,6 +3,7 @@ package com.example.demo.resources;
 import com.example.demo.domain.AssistenteSocial;
 import com.example.demo.domain.Auxilio;
 import com.example.demo.domain.AuxilioTemporario;
+import com.example.demo.services.AlunoService;
 import com.example.demo.services.AuxilioService;
 import com.example.demo.services.AuxilioTemporarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class AuxilioTemporarioResource {
 	@Autowired
 	private AuxilioTemporarioService service;
 
+	@Autowired
+	private AlunoService alunoService;
+
 
 
 	@GetMapping("/{id}")
@@ -29,6 +33,14 @@ public class AuxilioTemporarioResource {
 		Optional<AuxilioTemporario> auxilioTemporario = service.findById(id);
 		return ResponseEntity.ok().body(auxilioTemporario);
 	}
+
+	@GetMapping("/aluno/{id}")
+	@CrossOrigin
+	public ResponseEntity<List<AuxilioTemporario>> findByAluno(@PathVariable("id") long id){
+		List<AuxilioTemporario> auxilioTemporario = service.findByAluno_id(id);
+		return ResponseEntity.ok().body(auxilioTemporario);
+	}
+
 
 	@GetMapping
 	@CrossOrigin
@@ -57,7 +69,11 @@ public class AuxilioTemporarioResource {
 	@DeleteMapping("/{id}")
 	@CrossOrigin
 	public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-		service.delete(id);
+		Optional<AuxilioTemporario> aux = service.findById(id);
+		if(aux.isPresent()){
+			aux.get().setStatus("indeferido");
+		}
+		//service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }

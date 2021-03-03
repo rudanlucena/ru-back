@@ -1,15 +1,16 @@
 package com.example.demo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Aluno {
 	
 	@Id
+	@GeneratedValue
+	private long id;
 	private String uuid;
 	private String nome;
 	private String matricula;
@@ -23,12 +24,14 @@ public class Aluno {
 	@OneToOne
 	private Auxilio auxilio;
 
-	public Aluno(String uuid, String nome, String matricula, String situacao, String cota) {
+	public Aluno(String uuid, String nome, String matricula, String situacao, String cota, long id) {
 		this.uuid = uuid;
 		this.nome = nome;
 		this.matricula = matricula;
 		this.situacao = situacao;
 		this.cota = cota;
+		this.id = id;
+
 	}
 
 	public Aluno() {
@@ -98,4 +101,13 @@ public class Aluno {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 }
